@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'models/two_player_session.dart';
@@ -44,6 +46,14 @@ class _PokerHomePageState extends State<PokerHomePage> {
   int _selectedTab = 0;
 
   int get _seedValue => int.tryParse(_seedText) ?? 3333;
+
+  void _reloadRandomGame() {
+    setState(() {
+      final rnd = Random();
+      _seedText = (rnd.nextInt(999999) + 1).toString();
+    });
+    _startGame();
+  }
 
   void _startGame() {
     setState(() {
@@ -99,7 +109,16 @@ class _PokerHomePageState extends State<PokerHomePage> {
         index: _selectedTab,
         children: [
           Scaffold(
-            appBar: AppBar(title: const Text('Matematyk vs Chaotyczny')),
+            appBar: AppBar(
+              title: const Text('Matematyk vs Chaotyczny'),
+              actions: [
+                IconButton(
+                  tooltip: 'Nowa rozgrywka (losowe ziarno)',
+                  icon: const Icon(Icons.refresh),
+                  onPressed: _reloadRandomGame,
+                ),
+              ],
+            ),
             body: TwoPlayerView(
               session: _session,
               currentHandIndex: _currentHandIndex,
