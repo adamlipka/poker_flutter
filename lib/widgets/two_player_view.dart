@@ -168,7 +168,25 @@ class TwoPlayerView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HandWidget(cards: hand.mathematicianCards, label: 'Gracz matematyczny – ${stage.handNameMath}'),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HandWidget(cards: hand.mathematicianCards, label: 'Gracz matematyczny – ${stage.handNameMath}'),
+            const SizedBox(width: 24),
+            Padding(
+              padding: const EdgeInsets.only(top: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('P(wygrana matematyka) ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%', style: Theme.of(context).textTheme.bodyMedium),
+                  const SizedBox(height: 2),
+                  Text('EV = ${stage.ev.toStringAsFixed(2)}', style: Theme.of(context).textTheme.bodyMedium),
+                ],
+              ),
+            ),
+          ],
+        ),
         const SizedBox(height: 12),
         HandWidget(cards: hand.chaoticCards, label: 'Gracz chaotyczny – ${stage.handNameChaotic}'),
         const SizedBox(height: 12),
@@ -187,9 +205,6 @@ class TwoPlayerView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Pula przed licytacją: ${stage.potAtStart.toStringAsFixed(0)}', style: Theme.of(context).textTheme.titleMedium),
-        const SizedBox(height: 4),
-        Text('P(wygrana matematyka) ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%'),
-        Text('EV = ${stage.ev.toStringAsFixed(2)}'),
         if (stage.actions.isNotEmpty) ...[
           const SizedBox(height: 8),
           Text('Licytacja:', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)),
