@@ -172,17 +172,28 @@ class TwoPlayerView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HandWidget(cards: hand.mathematicianCards, label: 'Gracz matematyczny – ${stage.handNameMath}'),
-            const SizedBox(width: 24),
-            Padding(
-              padding: const EdgeInsets.only(top: 28),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('P(wygrana matematyka) ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%', style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(height: 2),
-                  Text('EV = ${stage.ev.toStringAsFixed(2)}', style: Theme.of(context).textTheme.bodyMedium),
-                ],
+            const SizedBox(width: 30),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 26),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'P ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'EV = ${stage.ev.toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      softWrap: true,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -212,10 +223,17 @@ class TwoPlayerView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 4),
                 child: Row(
                   children: [
-                    Text(a.player == Player.mathematician ? 'Matematyk:' : 'Chaotyczny:', style: TextStyle(color: a.player == Player.mathematician ? Colors.blue : Colors.orange)),
+                    Expanded(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(a.player == Player.mathematician ? 'Matematyk:' : 'Chaotyczny:', style: TextStyle(color: a.player == Player.mathematician ? Colors.blue : Colors.orange)),
+                          const SizedBox(width: 8),
+                          Flexible(child: Text(_actionLabel(a), overflow: TextOverflow.ellipsis)),
+                        ],
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    Text(_actionLabel(a)),
-                    const Spacer(),
                     Text('pula ${a.potAfter.toStringAsFixed(0)}', style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey)),
                   ],
                 ),
