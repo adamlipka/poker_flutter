@@ -172,27 +172,37 @@ class TwoPlayerView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             HandWidget(cards: hand.mathematicianCards, label: 'Gracz matematyczny – ${stage.handNameMath}'),
-            const SizedBox(width: 30),
-            Flexible(
+            const SizedBox(width: 12),
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 26),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'P ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      softWrap: true,
-                      overflow: TextOverflow.visible,
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'EV = ${stage.ev.toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      softWrap: true,
-                    ),
-                  ],
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'P ≈ ${(stage.pWinMath * 100).toStringAsFixed(1)}%',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          maxLines: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'EV = ${stage.ev.toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          maxLines: 1,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
