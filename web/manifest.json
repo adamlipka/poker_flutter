@@ -1,6 +1,6 @@
 {
-    "name": "poker_flutter",
-    "short_name": "poker_flutter",
+    "name": "House of Cards",
+    "short_name": "House of Cards",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
