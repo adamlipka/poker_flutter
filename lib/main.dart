@@ -158,11 +158,7 @@ class _PokerHomePageState extends State<PokerHomePage> {
         children: [
           Scaffold(
             appBar: AppBar(
-              title: Text(
-                _gameMode == GameMode.botVsBot
-                    ? 'Matematyk vs Chaotyczny'
-                    : 'Ty vs ${_botType.label}',
-              ),
+              title: const Text('House of Cards'),
               actions: [
                 IconButton(
                   tooltip: 'Nowa rozgrywka (losowe ziarno)',
@@ -182,6 +178,7 @@ class _PokerHomePageState extends State<PokerHomePage> {
                     onNextStage: _nextStage,
                     onStageTapped: _onStageTapped,
                     onStartGame: _startGameFromCurrentSeed,
+                    modeLabel: 'Matematyk vs Chaotyczny',
                   )
                 : HumanVsBotView(
                     session: _humanVsBotSession,
@@ -191,6 +188,7 @@ class _PokerHomePageState extends State<PokerHomePage> {
                     onCheckOrCall: _humanCheckOrCall,
                     onRaise: _humanRaise,
                     onNextHand: _humanNextHand,
+                    modeLabel: 'Ty vs ${_botType.label}',
                   ),
           ),
           Scaffold(

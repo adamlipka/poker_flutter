@@ -15,6 +15,7 @@ class TwoPlayerView extends StatelessWidget {
     required this.onNextStage,
     this.onStageTapped,
     required this.onStartGame,
+    required this.modeLabel,
   });
 
   final TwoPlayerSession? session;
@@ -26,6 +27,7 @@ class TwoPlayerView extends StatelessWidget {
   final VoidCallback onNextStage;
   final void Function(int index)? onStageTapped;
   final VoidCallback onStartGame;
+  final String modeLabel;
 
   static const _phaseNames = ['Pre-flop', 'Flop', 'Turn', 'River'];
 
@@ -68,6 +70,13 @@ class TwoPlayerView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Text(
+            'Tryb: $modeLabel',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+          ),
+          const SizedBox(height: 6),
           _handNavigation(context),
           const SizedBox(height: 12),
           _phaseNavigation(context, hand),

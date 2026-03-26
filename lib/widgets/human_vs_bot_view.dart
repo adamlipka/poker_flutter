@@ -15,6 +15,7 @@ class HumanVsBotView extends StatelessWidget {
     required this.onCheckOrCall,
     required this.onRaise,
     required this.onNextHand,
+    required this.modeLabel,
   });
 
   final HumanVsBotSession? session;
@@ -24,6 +25,7 @@ class HumanVsBotView extends StatelessWidget {
   final VoidCallback onCheckOrCall;
   final VoidCallback onRaise;
   final VoidCallback onNextHand;
+  final String modeLabel;
 
   static const _phaseNames = ['Pre-flop', 'Flop', 'Turn', 'River'];
 
@@ -62,6 +64,13 @@ class HumanVsBotView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Text(
+            'Tryb: $modeLabel',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+          ),
+          const SizedBox(height: 6),
           _header(context, s),
           const SizedBox(height: 12),
           _phaseNavigation(context, s),
